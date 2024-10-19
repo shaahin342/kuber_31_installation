@@ -55,6 +55,9 @@ yum install -y iproute-tc
 
 kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket=unix:///var/run/crio/crio.sock --ignore-preflight-errors=...
 
+
+`````````````````````````````````````````````````````````````````````````````````````````````````````
+
 Your Kubernetes control-plane has initialized successfully!
 
 To start using your cluster, you need to run the following as a regular user:
@@ -66,4 +69,16 @@ To start using your cluster, you need to run the following as a regular user:
 Alternatively, if you are the root user, you can run:
 
   export KUBECONFIG=/etc/kubernetes/admin.conf
+  
+```````````````````````````````````````````````````````````````````````````````````````````````````````  
+
+lsmod | grep -i overlay
+
+
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/custom-resources.yaml -O
+kubectl create -f custom-resources.yaml
+watch kubectl get pods -n calico-system
+
+
   
